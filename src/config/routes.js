@@ -1,0 +1,35 @@
+const express = require("express");
+const cors = require("cors");
+// const createAccount = require("../api/routes/vendor");
+const vendors = require("../api/routes/vendor");
+const businessType = require("../api/routes/businessTypes");
+const productCategory = require("../api/routes/productCategories");
+const productBrand = require("../api/routes/productBrand");
+const product = require("../api/routes/products");
+const auth = require("../api/routes/authentication");
+const users = require("../api/routes/users");
+const carts = require("../api/routes/carts");
+const orders = require("../api/routes/orders");
+const storeOrders = require("../api/routes/orders");
+const uploadImage = require("../api/routes/images");
+// const changePassword = require("../api/routes/changePassword");
+
+module.exports = function (app) {
+  app.use(express.json({ limit: "100mb" }));
+  app.use(express.urlencoded({ limit: "100mb" }));
+  app.use(cors());
+  app.use(express.json());
+  // app.use("/api/create-user", createAccount);
+  app.use("/api/vendors", vendors);
+  app.use("/api/business-type", businessType);
+  app.use("/api/product-category", productCategory);
+  app.use("/api/product-brand", productBrand);
+  app.use("/api/product", product);
+  app.use("/api/auth", auth);
+  app.use("/api/users", users);
+  app.use("/api/cart", carts);
+  app.use("/api/orders", orders);
+  app.use("/api/store-orders", storeOrders);
+  app.use("/api/image", uploadImage);
+  // app.use("/api/changePassword", changePassword);
+};

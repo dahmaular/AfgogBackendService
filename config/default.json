@@ -1,0 +1,10 @@
+{
+  "jwtPrivateKey": "",
+  "db": "mongodb+srv://dahmaular:Ib30ZGgiJgbnX2qi@afgog.iftjr52.mongodb.net/afgog?retryWrites=true&w=majority",
+  "apiKey": "AIzaSyBIhGKUJYk2OCEjLkqd0rC94QpgZvc36Ic",
+  "authDomain": "afgog-1a208.firebaseapp.com",
+  "projectId": "afgog-1a208",
+  "storageBucket": "afgog-1a208.appspot.com",
+  "messagingSenderId": "124475993723",
+  "appId": "1:124475993723:web:7a40b59a808f51fdcabcde"
+}
