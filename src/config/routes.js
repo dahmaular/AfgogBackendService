@@ -12,6 +12,7 @@ const carts = require("../api/routes/carts");
 const orders = require("../api/routes/orders");
 const storeOrders = require("../api/routes/orders");
 const uploadImage = require("../api/routes/images");
+const verifyEmail = require("../api/routes/verifyEmail");
 // const changePassword = require("../api/routes/changePassword");
 
 module.exports = function (app) {
@@ -31,5 +32,6 @@ module.exports = function (app) {
   app.use("/api/orders", orders);
   app.use("/api/store-orders", storeOrders);
   app.use("/api/image", uploadImage);
+  app.use("/api/verify-email", verifyEmail);
   // app.use("/api/changePassword", changePassword);
 };

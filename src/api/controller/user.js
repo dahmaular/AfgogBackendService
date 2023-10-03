@@ -49,7 +49,7 @@ exports.createUser = async (req, res) => {
 
   try {
     const token = user.generateAuthToken();
-    data = _.pick(user, ["_id", "fullName", "email", "phone", "password"]);
+    data = _.pick(user, ["_id", "fullName", "email", "phone"]);
     message = "User created successfully";
     res.json({ data, token, message, isSuccess: true });
   } catch (error) {
