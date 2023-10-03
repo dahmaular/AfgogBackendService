@@ -94,8 +94,7 @@ exports.authenticateUser = async (req, res) => {
       const token = user.generateAuthToken();
       const authData = _.pick(user, [
         "_id",
-        "firstName",
-        "lastName",
+        "fullName",
         "email",
         "phone",
       ]);
