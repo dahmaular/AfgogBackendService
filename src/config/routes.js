@@ -7,6 +7,7 @@ const productCategory = require("../api/routes/productCategories");
 const productBrand = require("../api/routes/productBrand");
 const product = require("../api/routes/products");
 const auth = require("../api/routes/authentication");
+const authUser = require("../api/routes/authUser");
 const users = require("../api/routes/users");
 const carts = require("../api/routes/carts");
 const orders = require("../api/routes/orders");
@@ -27,6 +28,7 @@ module.exports = function (app) {
   app.use("/api/product-brand", productBrand);
   app.use("/api/product", product);
   app.use("/api/auth", auth);
+  app.use("/api/auth-user", authUser);
   app.use("/api/users", users);
   app.use("/api/cart", carts);
   app.use("/api/orders", orders);
