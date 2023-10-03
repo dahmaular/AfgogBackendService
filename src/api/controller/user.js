@@ -6,6 +6,7 @@ const nodemailer = require("nodemailer");
 const { validate } = require("../validations/User");
 const { User } = require("../models/User");
 const { validateUpdate } = require("../validations/UserUpdate");
+const { validateEmailVerification } = require("../validations/VerifyEmail");
 
 let data;
 let message;
