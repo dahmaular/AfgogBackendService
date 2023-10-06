@@ -21,8 +21,8 @@ const options = {
       },
       servers: [
         {
-          url: "http://localhost:3001/",
-          // url: "https://afgog-api.onrender.com",
+          // url: "http://localhost:3001/",
+          url: "https://afgog-api.onrender.com",
         },
       ],
       components: {
