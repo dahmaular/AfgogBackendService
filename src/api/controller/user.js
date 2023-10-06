@@ -167,7 +167,7 @@ exports.updateUserProfile = async (req, res) => {
         message: "No user with the given id found.",
         isSuccess: false,
       });
-    data = user;
+    data = _.pick(user, ["_id", "fullName", "email", "phone"]);
     message = "successfull";
     res.json({ data, message, isSuccess: true });
   } catch (error) {
