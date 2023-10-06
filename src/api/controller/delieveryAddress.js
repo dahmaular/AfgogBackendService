@@ -43,10 +43,8 @@ exports.getDeliveryAddress = async (req, res) => {
 };
 
 exports.getDeliveryAddressByUserId = async (id, res) => {
-  // const address = await DeliveryAddress.find();
-
   try {
-    const address = await DeliveryAddress.findOne({ userId: id });
+    const address = await DeliveryAddress.find({ userId: id });
     data = address;
     message = "Address fetched successfully";
     res.json({ data, message, isSuccess: true });
