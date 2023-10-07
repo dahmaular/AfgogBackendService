@@ -1,9 +1,4 @@
 const express = require("express");
-const {
-  addAddress,
-  getDeliveryAddress,
-  getDeliveryAddressByUserId,
-} = require("../controller/delieveryAddress");
 
 const router = express.Router();
 const auth = require("../middleware/auth");
@@ -26,6 +21,7 @@ const {
  *         - expiry
  *         - cvv
  *         - userId
+ *         - type
  *       properties:
  *         id:
  *           type: string
@@ -45,6 +41,9 @@ const {
  *         userId:
  *           type: string
  *           description: The user id
+ *         type:
+ *           type: string
+ *           description: The user id
  *       example:
  *         id: string
  *         cardName: string
@@ -52,6 +51,7 @@ const {
  *         expiry: string
  *         cvv: string
  *         userId: string
+ *         type: string
  */
 
 /**
@@ -66,6 +66,7 @@ const {
  *         - expiry
  *         - cvv
  *         - userId
+ *         - type
  *       properties:
  *         cardName:
  *           type: string
@@ -82,12 +83,16 @@ const {
  *         userId:
  *           type: string
  *           description: The user id
+ *         type:
+ *           type: string
+ *           description: The user id
  *       example:
  *         cardName: string
  *         cardNumber: string
  *         expiry: string
  *         cvv: string
  *         userId: string
+ *         type: string
  */
 
 /**

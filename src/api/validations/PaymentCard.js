@@ -7,6 +7,7 @@ function validatePaymentCard(payment) {
     expiry: Joi.string().min(3).max(500).required(),
     cvv: Joi.string().min(3).max(500).required(),
     userId: Joi.string().min(3).max(500).required(),
+    type: Joi.string().min(3).max(500).required(),
   });
 
   const validation = schema.validate(payment);

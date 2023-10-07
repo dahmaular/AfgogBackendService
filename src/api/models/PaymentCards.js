@@ -25,6 +25,12 @@ const paymentCardSchema = new mongoose.Schema({
     minlength: 3,
     maxlength: 1024,
   },
+  type: {
+    type: String,
+    required: true,
+    minlength: 3,
+    maxlength: 1024,
+  },
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",

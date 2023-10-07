@@ -6,7 +6,7 @@ let message;
 
 exports.addPaymentCard = async (req, res) => {
   const { error } = validate(req.body);
-  const { cardName, cardNumber, expiry, cvv, userId } = req.body;
+  const { type, cardName, cardNumber, expiry, cvv, userId } = req.body;
   if (error)
     return res
       .status(400)
@@ -14,6 +14,7 @@ exports.addPaymentCard = async (req, res) => {
 
   try {
     let card = new PaymentCard({
+      type,
       cardName,
       cardNumber,
       cvv,
