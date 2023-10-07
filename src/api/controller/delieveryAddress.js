@@ -1,5 +1,6 @@
 const { DeliveryAddress } = require("../models/DeliveryAddress");
 const { validate } = require("../validations/DeliveryAddress");
+const _ = require("lodash");
 
 let data;
 let message;
@@ -22,7 +23,15 @@ exports.addAddress = async (req, res) => {
     });
     await deliveryAddress.save();
 
-    res.json({ deliveryAddress, message: "Successful" });
+    data = _.pick(deliveryAddress, [
+      "address",
+      "city",
+      "name",
+      "phoneNumber",
+      "userId",
+    ]);
+
+    res.json({ data, message: "Successful", isSuccess: true });
   } catch (error) {
     console.log(error);
     res.json(error);
@@ -44,7 +53,7 @@ exports.getDeliveryAddress = async (req, res) => {
 
 exports.getDeliveryAddressByUserId = async (id, res) => {
   try {
-    const address = await DeliveryAddress.find({ userId: id });
+    const address = await DeliveryAddress.find({ userId: id }).select('-dateCreated').select('-dateModified');
     data = address;
     message = "Address fetched successfully";
     res.json({ data, message, isSuccess: true });

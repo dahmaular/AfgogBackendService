@@ -1,5 +1,6 @@
 const { PaymentCard } = require("../models/PaymentCards");
 const { validate } = require("../validations/PaymentCard");
+const _ = require("lodash");
 
 let data;
 let message;
@@ -23,7 +24,16 @@ exports.addPaymentCard = async (req, res) => {
     });
     await card.save();
 
-    res.json({ card, message: "Successful" });
+    data = _.pick(card, [
+      "type",
+      "cardName",
+      "cardNumber",
+      "cvv",
+      "expiry",
+      "userId"
+    ]);
+
+    res.json({ data, message: "Successful", isSuccess: true });
   } catch (error) {
     console.log(error);
     res.json(error);
@@ -47,7 +57,7 @@ exports.getPaymentCardByUserId = async (id, res) => {
   // const address = await DeliveryAddress.find();
 
   try {
-    const card = await PaymentCard.find({ userId: id });
+    const card = await PaymentCard.find({ userId: id }).select('-dateCreated').select('-dateModified');
     data = card;
     message = "Cards fetched successfully";
     res.json({ data, message, isSuccess: true });
