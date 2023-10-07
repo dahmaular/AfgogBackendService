@@ -46,7 +46,7 @@ exports.getPaymentCardByUserId = async (id, res) => {
   // const address = await DeliveryAddress.find();
 
   try {
-    const card = await PaymentCard.findOne({ userId: id });
+    const card = await PaymentCard.find({ userId: id });
     data = card;
     message = "Cards fetched successfully";
     res.json({ data, message, isSuccess: true });
