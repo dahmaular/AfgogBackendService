@@ -1,8 +1,8 @@
 const express = require("express");
-const { addToCart, getCartItems } = require("../controller/cart");
+const { addToCart, getCartItems, getCartByUserId } = require("../controller/cart");
 const router = express.Router();
 
-// const auth = require("../middleware/auth");
+const auth = require("../middleware/auth");
 
 /**
  * @swagger
@@ -15,6 +15,7 @@ const router = express.Router();
  *         - product
  *         - amount
  *         - count
+ *         - userId
  *       properties:
  *         id:
  *           type: string
@@ -28,11 +29,15 @@ const router = express.Router();
  *         count:
  *           type: string
  *           description: The count in the cart
+ *         userId:
+ *           type: string
+ *           description: The user id
  *       example:
  *         id: string
  *         product: string
  *         amount: string
  *         count: string
+ *         userId: string
  */
 
 /**
@@ -45,6 +50,7 @@ const router = express.Router();
  *         - product
  *         - amount
  *         - count
+ *         - userId
  *       properties:
  *         product:
  *           type: string
@@ -55,10 +61,14 @@ const router = express.Router();
  *         count:
  *           type: string
  *           description: The user email address
+ *         userId:
+ *           type: string
+ *           description: The user id
  *       example:
  *         product: string
  *         amount: string
  *         count: string
+ *         userId: string
  */
 
 /**
@@ -115,6 +125,34 @@ router.post("/", async (req, res) => {
 router.get("/", async (req, res) => {
   // get all users
   getCartItems(req, res);
+});
+
+/**
+ * @swagger
+ * /api/cart/{id}:
+ *   get:
+ *     summary: Returns the list of all the items in cart
+ *     tags: [Products]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The user id
+ *     responses:
+ *       200:
+ *         description: The list of the users
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/CartPost'
+ */
+router.get("/:id", async (req, res) => {
+  // get all users
+  getCartByUserId(req.params.id, res);
 });
 
 module.exports = router;

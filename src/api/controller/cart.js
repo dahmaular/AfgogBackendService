@@ -20,11 +20,12 @@ exports.addToCart = async (req, res) => {
       .send({ message: "Item already in cart.", isSuccess: false });
 
   try {
-    cart = new Cart(_.pick(req.body, ["product", "amount", "count"]));
+    cart = new Cart(_.pick(req.body, ["product", "amount", "count", "userId"]));
     await cart.save();
 
     message = "Item added to cart successfully";
-    res.json({ cart, message, isSuccess: true });
+    data = cart;
+    res.json({ data, message, isSuccess: true });
   } catch (error) {
     console.log(error);
     res.json(error);
@@ -42,4 +43,14 @@ exports.getCartItems = async (req, res) => {
   }
 };
 
-
+exports.getCartByUserId = async (id, res) => {
+  try {
+    const cart = await Cart.find({ userId: id });
+    data = cart;
+    message = "Cart fetched successfully";
+    res.json({ data, message, isSuccess: true });
+  } catch (error) {
+    console.log("error", error);
+    res.json({ data, error });
+  }
+};

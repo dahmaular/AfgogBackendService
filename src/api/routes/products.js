@@ -50,7 +50,7 @@ const upload = multer({dest: 'uploads/'})
  *           type: string
  *           description: The product specification
  *         image:
- *           type: string
+ *           type: array
  *           description: The product image
  *         amount:
  *           type: string
@@ -79,7 +79,7 @@ const upload = multer({dest: 'uploads/'})
  *         availability: string
  *         description: string
  *         specification: string
- *         image: string
+ *         image: []
  *         amount: string
  *         price: string
  *         rating: string
@@ -127,7 +127,7 @@ const upload = multer({dest: 'uploads/'})
  *           type: string
  *           description: The product specification
  *         image:
- *           type: string
+ *           type: array
  *           description: The product image
  *         amount:
  *           type: string
@@ -156,7 +156,7 @@ const upload = multer({dest: 'uploads/'})
  *         storeId: string
  *         description: string
  *         specification: string
- *         image: string
+ *         image: []
  *         amount: string
  *         price: string
  *         rating: string

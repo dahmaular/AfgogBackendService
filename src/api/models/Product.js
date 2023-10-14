@@ -31,9 +31,7 @@ const productSchema = new mongoose.Schema({
     maxlength: 1024,
   },
   image: {
-    type: String,
-    minlength: 3,
-    maxlength: 1024,
+    type: Array,
   },
   amount: {
     type: String,

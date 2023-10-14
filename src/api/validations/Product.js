@@ -10,7 +10,7 @@ function validateProduct(product) {
     storeId: Joi.string().min(3).max(255),
     description: Joi.string().min(3).max(1024),
     specification: Joi.string().min(3).max(1024),
-    image: Joi.string().min(5).max(1024),
+    image: Joi.array(),
     amount: Joi.string().min(1).max(255),
     price: Joi.string().min(1).max(255),
     rating: Joi.string().min(1).max(255),
