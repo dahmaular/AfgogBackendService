@@ -26,9 +26,11 @@ function uploadFile(file) {
 exports.uploadFile = uploadFile;
 
 function getFileStream(fileKey) {
+  const neverExpireTime = 3153600000;
   const downloadParams = {
     Key: fileKey,
     Bucket: bucketName,
+    Expires: neverExpireTime,
   };
 
   // return s3.getObject(downloadParams).createReadStream();
