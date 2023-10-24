@@ -1,4 +1,5 @@
-const config = require('config');const firebase = require("firebase");
+const firebase = require("firebase");
+const config = require('config');
 const firebaseConfig = {
   apiKey: config.get("apiKey"),
   authDomain: config.get("authDomain"),

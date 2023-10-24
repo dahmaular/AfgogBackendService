@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const path=require('path');
 
 require("dotenv").config();
 const multer = require("multer");
@@ -29,9 +28,8 @@ const remoteFileName = "uploaded-file.jpg"; // Name for the file in Firebase Sto
 
 router.post("/", upload.single("image"), async (req, res) => {
     const dateTime = giveCurrentDateTime();
-    const fileName = req.file.originalname + path.extname(req.file.originalname)
-  console.log(path.extname(fileName));
-  const file = bucket.file(req.file.originalname + dateTime);
+  console.log(req.file);
+  const file = bucket.file(req.file.originalname + date);
 
   file
     .createWriteStream()
@@ -41,7 +39,7 @@ router.post("/", upload.single("image"), async (req, res) => {
     .on("finish", () => {
       console.log("File uploaded successfully.");
     })
-    .end(require("fs").readFileSync(fileName));
+    .end(require("fs").readFileSync(req.file));
 
   // Example 2: Downloading a file from Firebase Storage
   const downloadLocalPath = "path-to-save-downloaded-file.jpg"; // Path to save the downloaded file
@@ -54,7 +52,7 @@ router.post("/", upload.single("image"), async (req, res) => {
     .on("end", () => {
       console.log("File downloaded successfully.");
     })
-    .pipe(require("fs").createWriteStream('./uploads'));
+    .pipe(require("fs").createWriteStream(downloadLocalPath));
 
   console.log(imageUrl);
 

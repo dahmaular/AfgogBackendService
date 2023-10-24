@@ -13,14 +13,14 @@ exports.addToCart = async (req, res) => {
       .status(400)
       .send({ meesage: error.details[0].message, isSuccess: false });
 
-  let cart = await Cart.findOne({ product });
-  if (cart)
-    return res
-      .status(400)
-      .send({ message: "Item already in cart.", isSuccess: false });
+  // let cart = Cart;
+  // if (cart)
+  //   return res
+  //     .status(400)
+  //     .send({ message: "Item already in cart.", isSuccess: false });
 
   try {
-    cart = new Cart(_.pick(req.body, ["product", "amount", "count", "userId"]));
+    let cart = new Cart(_.pick(req.body, ["product", "amount", "count", "userId"]));
     await cart.save();
 
     message = "Item added to cart successfully";
