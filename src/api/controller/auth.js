@@ -58,8 +58,6 @@ exports.authentication = async (req, res) => {
       res.json({ isSuccess: false });
     }
   }
-
-
 };
 
 exports.authenticateUser = async (req, res) => {
@@ -97,6 +95,8 @@ exports.authenticateUser = async (req, res) => {
         "fullName",
         "email",
         "phone",
+        "isAgent",
+        "agencyName",
       ]);
       message = "User fetched successfully";
       res.json({ authData, token, message, isSuccess: true });
@@ -105,6 +105,4 @@ exports.authenticateUser = async (req, res) => {
       res.json({ isSuccess: false });
     }
   }
-
-
 };
