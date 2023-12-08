@@ -42,7 +42,16 @@ exports.createUser = async (req, res) => {
       characters[Math.floor(Math.random() * characters.length)];
   }
 
-  user = new User(_.pick(req.body, ["fullName", "email", "phone", "password"]));
+  user = new User(
+    _.pick(req.body, [
+      "fullName",
+      "email",
+      "phone",
+      "password",
+      "isAgent",
+      "agencyName",
+    ])
+  );
   const salt = await bcrypt.genSalt(10);
   user.password = await bcrypt.hash(user.password, salt);
   user.confirmationCode = confirmationCode;
@@ -50,7 +59,7 @@ exports.createUser = async (req, res) => {
 
   try {
     const token = user.generateAuthToken();
-    data = _.pick(user, ["_id", "fullName", "email", "phone"]);
+    data = _.pick(user, ["_id", "fullName", "email", "phone", "isAgent", "agencyName"]);
     message = "User created successfully";
     res.json({ data, token, message, isSuccess: true });
   } catch (error) {
@@ -156,7 +165,7 @@ exports.updateUserProfile = async (req, res) => {
       req.params.id,
       {
         fullName,
-        phone
+        phone,
       },
       {
         new: true,

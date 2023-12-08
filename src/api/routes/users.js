@@ -16,6 +16,8 @@ const router = express.Router();
  *         - email
  *         - phone
  *         - password
+ *         - isAgent
+ *         - agencyName
  *       properties:
  *         id:
  *           type: string
@@ -32,12 +34,20 @@ const router = express.Router();
  *         password:
  *           type: string
  *           description: The user password
+ *         isAgent:
+ *           type: boolean
+ *           description: The user role
+ *         agencyName:
+ *           type: string
+ *           description: The user aagency name
  *       example:
  *         id: string
  *         fullName: string
  *         email: string
  *         phone: string
  *         password: string
+ *         isAgent: string
+ *         agencyName: string
  */
 
 /**
@@ -51,6 +61,8 @@ const router = express.Router();
  *         - email
  *         - phone
  *         - password
+ *         - isAgent
+ *         - agencyName
  *       properties:
  *         fullName:
  *           type: string
@@ -64,11 +76,19 @@ const router = express.Router();
  *         password:
  *           type: string
  *           description: The user password
+ *         isAgent:
+ *           type: boolean
+ *           description: The user role
+ *         agencyName:
+ *           type: string
+ *           description: The user agency name
  *       example:
  *         fullName: string
  *         email: string
  *         phone: string
  *         password: string
+ *         isAgent: string
+ *         agencyName: string
  */
 
 /**

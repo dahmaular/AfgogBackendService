@@ -6,6 +6,8 @@ function validateUser(user) {
     email: Joi.string().email().min(3).max(255).required(),
     phone: Joi.string().min(11).max(16).required(),
     password: Joi.string().min(6).max(50).required(),
+    isAgent: Joi.boolean(),
+    agencyName: Joi.string().min(6).max(50).required(),
   });
 
   const validation = schema.validate(user);

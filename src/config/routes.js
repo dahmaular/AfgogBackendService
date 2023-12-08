@@ -16,6 +16,7 @@ const uploadImage = require("../api/routes/imageUpload");
 const verifyEmail = require("../api/routes/verifyEmail");
 const deliveryAddress = require("../api/routes/deliveryAddress");
 const paymentCards = require("../api/routes/paymentCards");
+const propertyCategory = require("../api/routes/productCategories");
 // const changePassword = require("../api/routes/changePassword");
 
 module.exports = function (app) {
@@ -39,5 +40,6 @@ module.exports = function (app) {
   app.use("/api/verify-email", verifyEmail);
   app.use("/api/delivery-address", deliveryAddress);
   app.use("/api/payment-cards", paymentCards);
+  app.use("/api/property-category", propertyCategory);
   // app.use("/api/changePassword", changePassword);
 };

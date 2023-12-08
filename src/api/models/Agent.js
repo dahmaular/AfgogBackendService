@@ -2,8 +2,14 @@ const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const config = require("config");
 
-const userSchema = new mongoose.Schema({
-  fullName: {
+const agentSchema = new mongoose.Schema({
+  firstName: {
+    type: String,
+    minlength: 3,
+    maxlength: 500,
+    required: true,
+  },
+  lastName: {
     type: String,
     minlength: 3,
     maxlength: 500,
@@ -37,26 +43,29 @@ const userSchema = new mongoose.Schema({
     type: String,
     unique: true,
   },
-  isAgent: {
-    type: Boolean,
-    default: false
-  },
-  agencyName: {
+  address: {
     type: String,
     minlength: 5,
-    maxlength: 1024,
-  }
-  
+    maxlength: 255,
+  },
+  dateCreated: {
+    type: Date,
+    default: Date.now(),
+  },
+  dateModified: {
+    type: Date,
+    default: Date.now(),
+  },
 });
 
-userSchema.methods.generateAuthToken = function (user) {
-  const token = jwt.sign({ user }, config.get("jwtPrivateKey"), {
+agentSchema.methods.generateAuthToken = function (agent) {
+  const token = jwt.sign({ agent }, config.get("jwtPrivateKey"), {
     expiresIn: "2h",
   });
   return token;
 };
 
-const User = mongoose.model("User", userSchema);
+const Agent = mongoose.model("Agent", agentSchema);
 
-exports.User = User;
-exports.userSchema = userSchema;
+exports.Agent = Agent;
+exports.agentSchema = agentSchema;
