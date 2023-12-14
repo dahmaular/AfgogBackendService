@@ -49,12 +49,12 @@ const propertySchema = new mongoose.Schema({
   },
   bedroom: {
     type: String,
-    minlength: 3,
+    minlength: 1,
     maxlength: 1024,
   },
   bathroom: {
     type: String,
-    minlength: 3,
+    minlength: 1,
     maxlength: 1024,
   },
   facilities: {
