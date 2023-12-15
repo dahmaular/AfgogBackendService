@@ -13,9 +13,14 @@ const propertySchema = new mongoose.Schema({
     minlength: 3,
     maxlength: 1024,
   },
+  mainImage: {
+    type: String,
+    required: true,
+    minlength: 3,
+    maxlength: 1024,
+  },
   images: {
     type: Array,
-    required: true,
   },
   type: {
     type: String,
