@@ -50,27 +50,17 @@ exports.createUser = async (req, res) => {
       "password",
       "isAgent",
       "agencyName",
-      "isRealEstate",
+      "isRealEstate"
     ])
   );
   const salt = await bcrypt.genSalt(10);
   user.password = await bcrypt.hash(user.password, salt);
   user.confirmationCode = confirmationCode;
-  if (user.isAgent === true) {
-    user.isRealEstate = true;
-  }
   await user.save();
 
   try {
     const token = user.generateAuthToken();
-    data = _.pick(user, [
-      "_id",
-      "fullName",
-      "email",
-      "phone",
-      "isAgent",
-      "agencyName",
-    ]);
+    data = _.pick(user, ["_id", "fullName", "email", "phone", "isAgent", "agencyName"]);
     message = "User created successfully";
     res.json({ data, token, message, isSuccess: true });
   } catch (error) {
