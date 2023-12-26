@@ -97,6 +97,7 @@ exports.authenticateUser = async (req, res) => {
         "phone",
         "isAgent",
         "agencyName",
+        "isRealEstate"
       ]);
       message = "User fetched successfully";
       res.json({ authData, token, message, isSuccess: true });

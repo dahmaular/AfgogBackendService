@@ -45,6 +45,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     minlength: 5,
     maxlength: 1024,
+  },
+  isRealEstate: {
+    type: Boolean,
+    default: false
   }
   
 });

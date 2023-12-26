@@ -50,6 +50,7 @@ exports.createUser = async (req, res) => {
       "password",
       "isAgent",
       "agencyName",
+      "isRealEstate"
     ])
   );
   const salt = await bcrypt.genSalt(10);
