@@ -8,6 +8,7 @@ function validateUser(user) {
     password: Joi.string().min(6).max(50).required(),
     isAgent: Joi.boolean(),
     agencyName: Joi.string().min(6).max(50),
+    isRealEstate: Joi.boolean(),
   });
 
   const validation = schema.validate(user);
