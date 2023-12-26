@@ -10,7 +10,7 @@ function validateProperty(property) {
     size: Joi.string().min(3).max(255),
     description: Joi.string().min(3).max(1024),
     agentId: Joi.string().min(3).max(1024),
-    mainImage: Joi.string().min(3).max(1024).required,
+    mainImage: Joi.string().min(3).max(1024).required(),
     images: Joi.array(),
     bedroom: Joi.string().min(1).max(255),
     price: Joi.string().min(1).max(255),
