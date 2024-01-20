@@ -48,6 +48,8 @@ exports.createProperty = async (req, res) => {
   }
 };
 
+
+
 exports.getProperties = async (req, res) => {
   const property = await Property.find();
 
