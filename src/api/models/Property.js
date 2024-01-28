@@ -26,6 +26,7 @@ const propertySchema = new mongoose.Schema({
     type: String,
     minlength: 3,
     maxlength: 1024,
+    required: true
   },
   condition: {
     type: String,
@@ -38,6 +39,16 @@ const propertySchema = new mongoose.Schema({
     maxlength: 1024,
   },
   description: {
+    type: String,
+    minlength: 3,
+    maxlength: 1024,
+  },
+  carModel: {
+    type: String,
+    minlength: 3,
+    maxlength: 1024,
+  },
+  carYear: {
     type: String,
     minlength: 3,
     maxlength: 1024,
@@ -79,6 +90,10 @@ const propertySchema = new mongoose.Schema({
   dateModified: {
     type: Date,
     default: Date.now(),
+  },
+  approved: {
+    type: Boolean,
+    default: false,
   },
 });
 

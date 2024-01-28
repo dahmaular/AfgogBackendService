@@ -1,6 +1,6 @@
 const _ = require("lodash");
 const { Property } = require("../models/Property");
-const { validate } = require("../validations/Property");
+const { validate, validateApproval } = require("../validations/Property");
 // must be used to avoid bug
 
 let data;
@@ -14,11 +14,11 @@ exports.createProperty = async (req, res) => {
       .status(400)
       .send({ meesage: error.details[0].message, isSuccess: false });
 
-//   let property = await Property;
-//   if (product)
-//     return res
-//       .status(400)
-//       .send({ message: "Product already exists.", isSuccess: false });
+  //   let property = await Property;
+  //   if (product)
+  //     return res
+  //       .status(400)
+  //       .send({ message: "Product already exists.", isSuccess: false });
 
   try {
     let property = new Property(
@@ -37,6 +37,8 @@ exports.createProperty = async (req, res) => {
         "size",
         "facilities",
         "type",
+        "carModel",
+        "carYear",
       ])
     );
     await property.save();
@@ -47,8 +49,6 @@ exports.createProperty = async (req, res) => {
     res.json(error);
   }
 };
-
-
 
 exports.getProperties = async (req, res) => {
   const property = await Property.find();
@@ -95,7 +95,7 @@ exports.updateProperty = async (req, res) => {
         agentId: req.body.agentId,
         description: req.body.description,
         address: req.body.address,
-        mainImage:req.body.mainImage,
+        mainImage: req.body.mainImage,
         images: req.body.images,
         type: req.body.type,
         price: req.body.price,
@@ -103,6 +103,39 @@ exports.updateProperty = async (req, res) => {
         bedroom: req.body.bedroom,
         bathroom: req.body.bathroom,
         facilities: req.body.facilities,
+        carModel: req.body.carModel,
+        carYear: req.body.carYear,
+      },
+      {
+        new: true,
+      }
+    );
+    if (!property)
+      return res.status(404).send({
+        message: "No property with the given id found.",
+        isSuccess: false,
+      });
+    data = property;
+    message = "successfull";
+    res.json({ data, message, isSuccess: true });
+  } catch (error) {
+    message = error.message;
+    res.json({ data, message, isSuccess: false });
+  }
+};
+
+exports.approveProperty = async (req, res) => {
+  const { error } = validateApproval(req.body);
+  if (error)
+    return res
+      .status(400)
+      .send({ meesage: error.details[0].message, isSuccess: false });
+
+  try {
+    const property = await Property.findByIdAndUpdate(
+      req.params.id,
+      {
+        approved: true,
       },
       {
         new: true,
