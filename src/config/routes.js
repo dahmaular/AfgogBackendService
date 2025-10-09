@@ -20,6 +20,9 @@ const propertyCategory = require("../api/routes/productCategories");
 const property = require("../api/routes/properties");
 const inspection = require("../api/routes/inspections");
 const approveProperty = require("../api/routes/approveProperty");
+const sendOtp = require("../api/routes/sendOtp");
+const verifyOtp = require("../api/routes/verifyOtp");
+const appVersion = require("../api/routes/appVersions");
 // const changePassword = require("../api/routes/changePassword");
 
 module.exports = function (app) {
@@ -46,6 +49,9 @@ module.exports = function (app) {
   app.use("/api/property-category", propertyCategory);
   app.use("/api/property", property);
   app.use("/api/inspection", inspection);
-  app.use("/api/approve-property", approveProperty)
+  app.use("/api/approve-property", approveProperty);
+  app.use("/api/sendOtp", sendOtp);
+  app.use("/api/verify-otp", verifyOtp);
+  app.use("/api/appVersion", appVersion);
   // app.use("/api/changePassword", changePassword);
 };

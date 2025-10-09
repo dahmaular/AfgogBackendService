@@ -2,7 +2,7 @@ const express = require("express");
 
 const router = express.Router();
 const auth = require("../middleware/auth");
-const { requestInspection, getAllInspections, getInspectionDateByUserID } = require("../controller/inspect");
+const { requestInspection, getAllInspections, getInspectionDateByUserID, getInspectionDateByID } = require("../controller/inspect");
 
 /**
  * @swagger
@@ -151,7 +151,7 @@ router.get("/", auth, async (req, res) => {
  */
 router.get("/:id", auth, async (req, res) => {
   // get address of 1 user
-  getInspectionDateByUserID(req.params.id, res);
+  getInspectionDateByID(req.params.id, res);
 });
 
 module.exports = router;

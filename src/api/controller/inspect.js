@@ -15,13 +15,11 @@ exports.requestInspection = async (req, res) => {
 
   let inspect = await Inspection.findOne({ property: propertyId });
   if (inspect)
-    return res
-      .status(400)
-      .send({
-        message: "You have already requested inspection for this item",
-        isSuccess: false,
-        responseCode: "99",
-      });
+    return res.status(400).send({
+      message: "You have already requested inspection for this item",
+      isSuccess: false,
+      responseCode: "99",
+    });
 
   try {
     inspect = new Inspection({
@@ -45,6 +43,27 @@ exports.getInspectionDateByUserID = async (id, res) => {
     const inspect = await Inspection.find({ inspector: id })
       .populate("inspector")
       .populate("property");
+    data = inspect;
+    message = "successful";
+    code = "00";
+    res.json({ data, message, isSuccess: true, responseCode: code });
+  } catch (error) {
+    console.log("error", error);
+    res.json(error);
+  }
+};
+
+exports.getInspectionDateByID = async (id, res) => {
+  try {
+    const inspect = await Inspection.findById(id)
+      .populate("inspector")
+      .populate("property");
+
+    if (!inspect)
+      return res
+        .status(404)
+        .json({ message: "No inspection found", isSuccess: false });
+
     data = inspect;
     message = "successful";
     code = "00";
