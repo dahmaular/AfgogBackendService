@@ -59,7 +59,8 @@ const agentSchema = new mongoose.Schema({
 });
 
 agentSchema.methods.generateAuthToken = function (agent) {
-  const token = jwt.sign({ agent }, config.get("jwtPrivateKey"), {
+  const jwtKey = process.env.afgog_jwtPrivateKey || config.get("jwtPrivateKey");
+  const token = jwt.sign({ agent }, jwtKey, {
     expiresIn: "2h",
   });
   return token;

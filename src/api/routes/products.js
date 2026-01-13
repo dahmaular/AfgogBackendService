@@ -7,7 +7,8 @@ const {
 } = require("../controller/product");
 const router = express.Router();
 const multer = require("multer");
-const upload = multer({dest: 'uploads/'})
+// Use memory storage instead of disk storage for Vercel compatibility
+const upload = multer({ storage: multer.memoryStorage() });
 
 // const auth = require("../middleware/auth");
 

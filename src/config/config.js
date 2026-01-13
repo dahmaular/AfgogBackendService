@@ -1,7 +1,10 @@
 const config = require('config');
 
 module.exports = function() {
-  if (!config.get('jwtPrivateKey')) {
+  // Check environment variable first, then fall back to config file
+  const jwtKey = process.env.afgog_jwtPrivateKey || config.get('jwtPrivateKey');
+  
+  if (!jwtKey) {
     throw new Error('FATAL ERROR: jwtPrivateKey is not defined.');
   }
 }

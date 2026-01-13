@@ -30,7 +30,39 @@ const resetPassword = require("../api/routes/resetPassword");
 module.exports = function (app) {
   app.use(express.json({ limit: "100mb" }));
   app.use(express.urlencoded({ limit: "100mb" }));
-  app.use(cors());
+  
+  // CORS Configuration
+  const allowedOrigins = [
+    'http://localhost:3000',
+    'http://localhost:3001',
+    'https://afgog-backend-service.vercel.app',
+    'https://afgog-backend-service-*.vercel.app', // Preview deployments
+  ];
+  
+  app.use(cors({
+    origin: function (origin, callback) {
+      // Allow requests with no origin (like mobile apps or curl)
+      if (!origin) return callback(null, true);
+      
+      // Check if origin is in allowed list or matches preview pattern
+      const isAllowed = allowedOrigins.some(allowed => {
+        if (allowed.includes('*')) {
+          const pattern = allowed.replace('*', '.*');
+          return new RegExp(pattern).test(origin);
+        }
+        return allowed === origin;
+      });
+      
+      if (isAllowed) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+    credentials: true,
+    optionsSuccessStatus: 200
+  }));
+  
   app.use(express.json());
   // app.use("/api/create-user", createAccount);
   app.use("/api/vendors", vendors);

@@ -1,5 +1,6 @@
 const S3 = require("aws-sdk/clients/s3");
 const fs = require("fs");
+const stream = require("stream");
 
 const bucketName = process.env.AWS_BUCKET_NAME;
 const region = process.env.AWS_REGION;
@@ -13,12 +14,24 @@ const s3 = new S3({
 });
 
 function uploadFile(file) {
-  const fileStream = fs.createReadStream(file.path);
+  // Handle both disk storage (local) and memory storage (Vercel)
+  let fileBody;
+  
+  if (file.path) {
+    // File is on disk (local development)
+    fileBody = fs.createReadStream(file.path);
+  } else if (file.buffer) {
+    // File is in memory (Vercel/production)
+    fileBody = file.buffer;
+  } else {
+    throw new Error('Invalid file object - no path or buffer found');
+  }
 
   const uploadParams = {
     Bucket: bucketName,
-    Body: fileStream,
-    Key: file.filename,
+    Body: fileBody,
+    Key: file.filename || file.originalname,
+    ContentType: file.mimetype,
   };
 
   return s3.upload(uploadParams).promise();

@@ -89,7 +89,8 @@ const vendorSchema = new mongoose.Schema({
 });
 
 vendorSchema.methods.generateAuthToken = function (vendor) {
-  const token = jwt.sign({ vendor }, config.get("jwtPrivateKey"), {
+  const jwtKey = process.env.afgog_jwtPrivateKey || config.get("jwtPrivateKey");
+  const token = jwt.sign({ vendor }, jwtKey, {
     expiresIn: "2h",
   });
   return token;
