@@ -95,6 +95,11 @@ const propertySchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  tags: {
+    type: [String],
+    enum: ["featured", "luxury", "latest"],
+    default: ["latest"],
+  },
 });
 
 const Property = mongoose.model("Property", propertySchema);

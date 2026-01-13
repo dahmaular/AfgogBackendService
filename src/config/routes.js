@@ -23,6 +23,8 @@ const approveProperty = require("../api/routes/approveProperty");
 const sendOtp = require("../api/routes/sendOtp");
 const verifyOtp = require("../api/routes/verifyOtp");
 const appVersion = require("../api/routes/appVersions");
+const forgotPassword = require("../api/routes/forgotPassword");
+const resetPassword = require("../api/routes/resetPassword");
 // const changePassword = require("../api/routes/changePassword");
 
 module.exports = function (app) {
@@ -53,5 +55,7 @@ module.exports = function (app) {
   app.use("/api/sendOtp", sendOtp);
   app.use("/api/verify-otp", verifyOtp);
   app.use("/api/appVersion", appVersion);
+  app.use("/api/forgot-password", forgotPassword);
+  app.use("/api/reset-password", resetPassword);
   // app.use("/api/changePassword", changePassword);
 };

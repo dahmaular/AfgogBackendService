@@ -39,6 +39,7 @@ exports.createProperty = async (req, res) => {
         "type",
         "carModel",
         "carYear",
+        "tags",
       ])
     );
     await property.save();

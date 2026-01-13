@@ -43,12 +43,17 @@ const userSchema = new mongoose.Schema({
   },
   agencyName: {
     type: String,
-    minlength: 5,
     maxlength: 1024,
   },
   isRealEstate: {
     type: Boolean,
     default: false
+  },
+  resetPasswordToken: {
+    type: String,
+  },
+  resetPasswordExpire: {
+    type: Date,
   }
   
 });

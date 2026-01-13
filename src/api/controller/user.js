@@ -14,8 +14,8 @@ let message;
 const transporter = nodemailer.createTransport({
   service: "Gmail",
   auth: {
-    user: process.env.EMAIL,
-    pass: process.env.PASSWORD,
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASSWORD,
   },
 });
 
@@ -69,7 +69,7 @@ exports.createUser = async (req, res) => {
   }
 
   const mailOptions = {
-    from: process.env.EMAIL,
+    from: process.env.EMAIL_USER,
     to: req.body.email,
     subject: "Email Verification",
     text: `Your verification code is: ${confirmationCode}`,
