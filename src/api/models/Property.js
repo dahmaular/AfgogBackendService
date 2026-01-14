@@ -43,16 +43,6 @@ const propertySchema = new mongoose.Schema({
     minlength: 3,
     maxlength: 1024,
   },
-  carModel: {
-    type: String,
-    minlength: 3,
-    maxlength: 1024,
-  },
-  carYear: {
-    type: String,
-    minlength: 3,
-    maxlength: 1024,
-  },
   agentId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Property",

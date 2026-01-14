@@ -49,6 +49,12 @@ const options = {
   app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
 
 const port = process.env.PORT || 3001;
-const server = app.listen(port, () => winston.info(`Listening on port ${port}...`));
 
-module.exports = server;
+// For local development
+if (process.env.NODE_ENV !== 'production') {
+  const server = app.listen(port, () => winston.info(`Listening on port ${port}...`));
+  module.exports = server;
+} else {
+  // For Vercel serverless
+  module.exports = app;
+}

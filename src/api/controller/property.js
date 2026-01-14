@@ -1,4 +1,5 @@
 const _ = require("lodash");
+const mongoose = require("mongoose");
 const { Property } = require("../models/Property");
 const { validate, validateApproval } = require("../validations/Property");
 // must be used to avoid bug
@@ -37,8 +38,6 @@ exports.createProperty = async (req, res) => {
         "size",
         "facilities",
         "type",
-        "carModel",
-        "carYear",
         "tags",
       ])
     );
@@ -65,6 +64,14 @@ exports.getProperties = async (req, res) => {
 
 exports.getProperty = async (id, res) => {
   try {
+    // Validate if the id is a valid ObjectId
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ 
+        message: "Invalid property ID format", 
+        isSuccess: false 
+      });
+    }
+
     const property = await Property.findById(id);
     if (!property)
       return res
@@ -87,6 +94,14 @@ exports.updateProperty = async (req, res) => {
       .status(400)
       .send({ meesage: error.details[0].message, isSuccess: false });
 
+  // Validate if the id is a valid ObjectId
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    return res.status(400).json({ 
+      message: "Invalid property ID format", 
+      isSuccess: false 
+    });
+  }
+
   try {
     const property = await Property.findByIdAndUpdate(
       req.params.id,
@@ -104,8 +119,7 @@ exports.updateProperty = async (req, res) => {
         bedroom: req.body.bedroom,
         bathroom: req.body.bathroom,
         facilities: req.body.facilities,
-        carModel: req.body.carModel,
-        carYear: req.body.carYear,
+        tags: req.body.tags,
       },
       {
         new: true,
@@ -131,6 +145,14 @@ exports.approveProperty = async (req, res) => {
     return res
       .status(400)
       .send({ meesage: error.details[0].message, isSuccess: false });
+
+  // Validate if the id is a valid ObjectId
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    return res.status(400).json({ 
+      message: "Invalid property ID format", 
+      isSuccess: false 
+    });
+  }
 
   try {
     const property = await Property.findByIdAndUpdate(
