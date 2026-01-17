@@ -92,7 +92,7 @@ router.post("/", auth, async (req, res) => {
  *               items:
  *                 $ref: '#/components/schemas/ProductCategory'
  */
-router.get("/", auth, async (req, res) => {
+router.get("/", async (req, res) => {
   // get all product categories
   getCategories(req, res);
 });

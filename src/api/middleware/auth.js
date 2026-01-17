@@ -9,9 +9,11 @@ const verifyToken = (req, res, next) => {
     return res.status(403).send("A token is required for authorization");
   }
   try {
-    const decoded = jwt.verify(token.split(" ")[1], config.get('jwtPrivateKey'));
+    const jwtKey = process.env.afgog_jwtPrivateKey || config.get('jwtPrivateKey');
+    const decoded = jwt.verify(token.split(" ")[1], jwtKey);
     req.user = decoded;
   } catch (err) {
+    console.log("token error",err);
     return res.status(401).send("Invalid Token");
   }
   return next();

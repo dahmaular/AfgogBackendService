@@ -1,4 +1,5 @@
 const express = require("express");
+const { addPropCategory, getPropCategories, getPropCategory } = require("../controller/propertyCategory");
 const router = express.Router();
 
 const auth = require("../middleware/auth");
@@ -91,9 +92,9 @@ router.post("/", auth, async (req, res) => {
  *               items:
  *                 $ref: '#/components/schemas/PropertyCategory'
  */
-router.get("/", auth, async (req, res) => {
+router.get("/", async (req, res) => {
   // get all product categories
-  getCategories(req, res);
+  getPropCategories(req, res);
 });
 
 /**
@@ -121,7 +122,7 @@ router.get("/", auth, async (req, res) => {
  */
 router.get("/:id", auth, async (req, res) => {
     // get all product categories
-    getCategory(req.params.id, res);
+    getPropCategory(req.params.id, res);
   });
 
 module.exports = router;

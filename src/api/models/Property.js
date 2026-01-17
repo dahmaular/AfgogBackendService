@@ -73,6 +73,16 @@ const propertySchema = new mongoose.Schema({
     minlength: 3,
     maxlength: 1024,
   },
+  state: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "State",
+    required: true,
+  },
+  lga: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "LGA",
+    required: true,
+  },
   dateCreated: {
     type: Date,
     default: Date.now(),

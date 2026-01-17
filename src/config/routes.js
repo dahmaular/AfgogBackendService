@@ -16,7 +16,7 @@ const uploadImage = require("../api/routes/imageUpload");
 const verifyEmail = require("../api/routes/verifyEmail");
 const deliveryAddress = require("../api/routes/deliveryAddress");
 const paymentCards = require("../api/routes/paymentCards");
-const propertyCategory = require("../api/routes/productCategories");
+const propertyCategory = require("../api/routes/propCategories");
 const property = require("../api/routes/properties");
 const inspection = require("../api/routes/inspections");
 const approveProperty = require("../api/routes/approveProperty");
@@ -25,6 +25,8 @@ const verifyOtp = require("../api/routes/verifyOtp");
 const appVersion = require("../api/routes/appVersions");
 const forgotPassword = require("../api/routes/forgotPassword");
 const resetPassword = require("../api/routes/resetPassword");
+const states = require("../api/routes/states");
+const lgas = require("../api/routes/lgas");
 // const changePassword = require("../api/routes/changePassword");
 
 module.exports = function (app) {
@@ -89,5 +91,7 @@ module.exports = function (app) {
   app.use("/api/appVersion", appVersion);
   app.use("/api/forgot-password", forgotPassword);
   app.use("/api/reset-password", resetPassword);
+  app.use("/api/state", states);
+  app.use("/api/lga", lgas);
   // app.use("/api/changePassword", changePassword);
 };

@@ -18,6 +18,8 @@ function validateProperty(property) {
     bathroom: Joi.string().min(1).max(255),
     facilities: Joi.string().min(1).max(255),
     tags: Joi.array().items(Joi.string().valid("featured", "luxury", "latest")),
+    state: Joi_objectid().required(),
+    lga: Joi_objectid().required(),
   });
 
   const validation = schema.validate(property);
