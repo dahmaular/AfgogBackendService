@@ -86,6 +86,7 @@ exports.getProperties = async (req, res) => {
   
   try {
     const property = await Property.find()
+      .sort({ dateCreated: -1 })
       .populate("state")
       .populate("lga");
 
